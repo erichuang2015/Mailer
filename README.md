@@ -80,11 +80,14 @@ $mail->setHtml($html);
 
 ### Transports
 
-#### Defaults transports
+#### Default transport
 
 Default transport is **\Berlioz\Mailer\Transport\Mail** uses internal **mail()** of PHP.
+No configuration needed.
 
-You can uses another available transport for direct communication with SMTP server: **\Berlioz\Mailer\Transport\Smtp**.
+#### SMTP transport
+
+You can uses **SMTP** transport: **\Berlioz\Mailer\Transport\Smtp**, for direct communication with SMTP server.
 
 ```php
 $smtp = new \Berlioz\Mailer\Transport\Smtp('smpt.test.com',
@@ -103,6 +106,19 @@ $mailer = new \Berlioz\Mailer\Mailer(['transport' => ['name'      => 'smtp',
                                                                       'password' => 'password',
                                                                       'port'     => 25,
                                                                       'options'  => ['timeout' => 5]]]]);
+```
+
+#### SparkPost SMTP API
+
+If you uses **SparkPost** service to send emails, you can also uses **SparkPost SMTP API** transport.
+
+```php
+$sparkPost = new \Berlioz\Mailer\Transport\SparkPostSmtpApi('API KEY',
+                                                            ['campaign_id' => 'my_campaign',
+                                                             'options' => ['open_tracking' => false]],
+                                                            ['port' => 2525]);
+$mailer = new \Berlioz\Mailer\Mailer;
+$mailer->setTransport($sparkPost);
 ```
 
 #### Create a new transport
