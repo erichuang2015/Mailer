@@ -48,6 +48,18 @@ class Mail
     }
 
     /**
+     * Get additional header.
+     *
+     * @param string $name
+     *
+     * @return array
+     */
+    public function getHeader(string $name): array
+    {
+        return $this->headers[$name] ?? [];
+    }
+
+    /**
      * Set additional headers.
      *
      * WARNING: headers values needs to be encoded before!
